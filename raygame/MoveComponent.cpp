@@ -9,8 +9,8 @@ void MoveComponent::fixedUpdate(float deltaTime)
 	//Add the new velocity to the old position to get the new position
 	MathLibrary::Vector2 newPosition = getOwner()->getTransform()->getLocalPosition() + getVelocity() * deltaTime;
 
-	if (getUpdateFacing() && getVelocity().getMagnitude() > 0)
-		getOwner()->getTransform()->setForward(getVelocity());
+	/*if (getUpdateFacing() && getVelocity().getMagnitude() > 0)
+		getOwner()->getTransform()->setForward(getVelocity());*/
 
 	//std::cout << getVelocity().x << ", " << getVelocity().y << std::endl;
 

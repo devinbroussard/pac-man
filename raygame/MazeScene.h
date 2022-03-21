@@ -36,9 +36,9 @@ public:
 		NodeGraph::Node* node = nullptr;
 	};
 
-	static const int WIDTH = 28;
-	static const int HEIGHT = 31;
-	static const int TILE_SIZE = 25;
+	static const int WIDTH = 20;
+	static const int HEIGHT = 11;
+	static const int TILE_SIZE = 35;
 
 public:
 	/// <param name="map">A 2D array of TileKeys arranged height by width</param>

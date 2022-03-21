@@ -15,7 +15,6 @@ public:
 	Ghost(float x, float y, float speed, float maxForce, int color, Maze* maze);
 	~Ghost();
 
-	virtual void update(float deltaTime) override;
 	virtual void draw() override;
 
 	virtual void onCollision(Actor* other) override;

@@ -15,7 +15,7 @@ void Player::start()
 	Agent::start();
 
 	addComponent<PlayerMoveComponent>();
-	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/player.png")));
+	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/pac-man-left.png", "Images/pac-man-right.png")));
 	getTransform()->setScale({ Maze::TILE_SIZE, Maze::TILE_SIZE });
 	m_input = getComponent<InputComponent>();
 	setCollider(new AABBCollider(Maze::TILE_SIZE, Maze::TILE_SIZE, this));

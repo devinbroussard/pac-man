@@ -12,21 +12,15 @@ Ghost::Ghost(float x, float y, float maxSpeed, float maxForce, int color, Maze* 
 {
 	m_maze = maze;
 	getTransform()->setScale({ Maze::TILE_SIZE,Maze::TILE_SIZE });
-
+	addComponent(new SpriteComponent("Images/red-ghost-left.png", "Images/red-ghost-right.png"));
 	m_pathfindComponent = new PathfindComponent(maze);
 	m_pathfindComponent->setColor(color);
 	addComponent(m_pathfindComponent);
-	addComponent(new SpriteComponent("Images/enemy.png"));
 }
 
 Ghost::~Ghost()
 {
 	delete m_pathfindComponent;
-}
-
-void Ghost::update(float deltaTime)
-{
-	Agent::update(deltaTime);
 }
 
 void Ghost::draw()

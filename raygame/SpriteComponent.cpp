@@ -4,21 +4,36 @@
 #include "Actor.h"
 #include <Matrix3.h>
 #include <cmath>
+#include "MoveComponent.h"
 
 SpriteComponent::SpriteComponent(Texture2D* texture) : Component::Component()
 {
 	m_texture = texture;
 }
 
-SpriteComponent::SpriteComponent(const char* path) : Component::Component()
+SpriteComponent::SpriteComponent(const char* leftPath, const char* rightPath) : Component::Component()
 {
-	m_texture = new Texture2D(RAYLIB_H::LoadTexture(path));
+	m_rightTexture = new Texture2D(RAYLIB_H::LoadTexture(rightPath));
+	m_leftTexture = new Texture2D(RAYLIB_H::LoadTexture(leftPath));
+	m_texture = m_rightTexture;
 }
 
 SpriteComponent::~SpriteComponent()
 {
 	RAYLIB_H::UnloadTexture(*m_texture);
 	delete m_texture;
+}
+
+void SpriteComponent::update(float deltaTime)
+{
+	MoveComponent* moveComponent = getOwner()->getComponent<MoveComponent>();
+
+	if (moveComponent->getVelocity().x < 0)
+		m_texture = m_leftTexture;
+	else if (0 < moveComponent->getVelocity().x)
+		m_texture = m_rightTexture;
+
+	Component::start();
 }
 
 void SpriteComponent::draw()
