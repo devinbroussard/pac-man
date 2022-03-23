@@ -46,7 +46,7 @@ void PathfindComponent::update(float deltaTime)
 	/*if (m_path.getLength() == 1) {
 		m_owner->getMoveComponent()->setVelocity({ 0, 0 });
 		return;
-	}*/
+	}*/  
 
 	//Calculate the force
 	MathLibrary::Vector2 desiredVelocity = direction * m_owner->getMaxForce();

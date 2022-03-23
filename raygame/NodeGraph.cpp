@@ -110,8 +110,8 @@ float NodeGraph::getManhattanDistance(Node* start, Node* end) {
 
 void NodeGraph::drawGraph(Node* start)
 {
-	//DynamicArray<Node*> drawnList = DynamicArray<Node*>();
-	//drawConnectedNodes(start, drawnList);
+	DynamicArray<Node*> drawnList = DynamicArray<Node*>();
+	drawConnectedNodes(start, drawnList);
 }
 
 void NodeGraph::drawNode(Node* node, float size)
@@ -130,8 +130,8 @@ void NodeGraph::drawNode(Node* node, float size)
 void NodeGraph::drawConnectedNodes(Node* node, DynamicArray<Node*>& drawnList)
 {
 	drawnList.addItem(node);
-	if (node->walkable)
-		drawNode(node, 8);
+	/*if (node->walkable)
+		drawNode(node, 8);*/
 
 	for (int i = 0; i < node->edges.getLength(); i++)
 	{
