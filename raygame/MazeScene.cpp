@@ -3,12 +3,15 @@
 #include "Wall.h"
 #include "Ghost.h"
 #include "Transform2D.h"
+#include "SpriteComponent.h"
+#include "CircleCollider.h"
 
 Maze::TileKey _ = Maze::TileKey::OPEN;
 Maze::TileKey w = Maze::TileKey::WALL;
 Maze::TileKey s = Maze::TileKey::MUD;
 Maze::TileKey p = Maze::TileKey::PLAYER;
 Maze::TileKey g = Maze::TileKey::GHOST;
+Maze::TileKey c = Maze::TileKey::COIN;
 
 Maze::Maze()
 {
@@ -18,15 +21,15 @@ Maze::Maze()
 
 	TileKey map[Maze::HEIGHT][Maze::WIDTH] = {
 		{ w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w },
-		{ w, _, _, _, _, w, _, _, _, _, _, _, _, _, w, _, _, _, _, w },
+		{ w, _, _, _, _, w, _, _, _, c, c, _, _, _, w, _, _, _, _, w },
 		{ w, _, w, w, _, w, _, w, w, w, w, w, w, _, w, _, w, w, _, w },
 		{ w, _, w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w, _, w },
 		{ w, _, w, _, w, w, _, w, w, _, _, w, w, _, w, w, _, w, _, w },
-		{ w, _, _, _, _, _, _, w, _, _, g, _, w, _, _, _, _, _, _, w },
+		{ w, c, _, _, _, _, _, w, _, _, p, _, w, _, _, _, _, _, c, w },
 		{ w, _, w, _, w, w, _, w, w, w, w, w, w, _, w, w, _, w, _, w },
 		{ w, _, w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w, _, w },
 		{ w, _, w, w, _, w, _, w, w, w, w, w, w, _, w, _, w, w, _, w },
-		{ w, p, _, _, _, w, _, _, _, _, _, _, _, _, w, _, _, _, _, w },
+		{ w, g, _, _, _, w, _, _, _, c, c, _, _, _, w, _, _, _, g, w },
 		{ w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w }
 	};
 
@@ -90,12 +93,27 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		tile.actor = m_player;
 		addActor(tile.actor);
 		break;
-	case TileKey::GHOST:
+	case TileKey::COIN: {
 		tile.cost = 1.0f;
-		Ghost* ghost = new Ghost(position.x, position.y, 100, 50, 0xFF6666FF, this);
+		Actor* coin = new Actor(position.x, position.y, "Coin");
+		coin->addComponent(new SpriteComponent("Images/coin-art.png"));
+		coin->getTransform()->setScale({ 25, 25 });
+		CircleCollider* collider = new CircleCollider(coin);
+		collider->setCollisionRadius(25);
+		coin->setCollider(collider);
+		tile.actor = coin;
+		addActor(tile.actor);
+		m_coinCount++;
+	}
+		break;
+	case TileKey::GHOST: {
+		tile.cost = 1.0f;
+		Ghost* ghost = new Ghost(position.x, position.y, 100, 150, 0xFF6666FF, this);
+		ghost->getTransform()->setScale({ Maze::TILE_SIZE + 10, Maze::TILE_SIZE + 10 });
 		ghost->setTarget(m_player);
 		tile.actor = ghost;
 		addActor(tile.actor);
+	}
 		break;
 	}
 	return tile;

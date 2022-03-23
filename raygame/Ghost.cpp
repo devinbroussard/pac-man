@@ -12,7 +12,7 @@ Ghost::Ghost(float x, float y, float maxSpeed, float maxForce, int color, Maze* 
 {
 	m_maze = maze;
 	getTransform()->setScale({ Maze::TILE_SIZE,Maze::TILE_SIZE });
-	addComponent(new SpriteComponent("Images/red-ghost-left.png", "Images/red-ghost-right.png"));
+	addComponent(new SpriteComponent("Images/red-circle.png"));
 	m_pathfindComponent = new PathfindComponent(maze);
 	m_pathfindComponent->setColor(color);
 	addComponent(m_pathfindComponent);

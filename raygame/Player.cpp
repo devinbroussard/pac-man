@@ -9,13 +9,14 @@
 #include "Agent.h"
 #include "Collider.h"
 #include "InputComponent.h";
+#include "Engine.h"
 
 void Player::start()
 {
 	Agent::start();
 
 	addComponent<PlayerMoveComponent>();
-	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/pac-man-left.png", "Images/pac-man-right.png")));
+	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/blue-circle.png")));
 	getTransform()->setScale({ Maze::TILE_SIZE, Maze::TILE_SIZE });
 	m_input = getComponent<InputComponent>();
 	setCollider(new AABBCollider(Maze::TILE_SIZE, Maze::TILE_SIZE, this));
@@ -45,5 +46,14 @@ void Player::onCollision(Actor* other)
 		tilePosition = tilePosition - halfTile;
 		//getTransform()->setWorldPostion(getTransform()->getWorldPosition() - getMoveComponent()->getVelocity().getNormalized() * -.05f);
 		applyForce(getCollider()->getCollisionNormal() * -1 * getMoveComponent()->getVelocity().getMagnitude());
+	}
+
+	if (other->getName() == "Coin") {
+		Maze* scene = dynamic_cast<Maze*>(Engine::getCurrentScene());
+
+		if (scene) {
+			scene->removeActor(other);
+			scene->lowerCointCount();
+		}
 	}
 }

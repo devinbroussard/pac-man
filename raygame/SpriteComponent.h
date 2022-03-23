@@ -12,7 +12,7 @@ public:
 
 	/// <param name="path">The path of the texture to load</param>
 	/// <param name="name"></param>
-	SpriteComponent(const char* leftPath, const char* rightPath);
+	SpriteComponent(const char* path);
 
 	~SpriteComponent() override;
 
@@ -24,8 +24,6 @@ public:
 
 private:
 	Texture2D* m_texture;
-	Texture2D* m_rightTexture;
-	Texture2D* m_leftTexture;
 	int m_width;
 	int m_height;
 };

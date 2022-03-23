@@ -110,21 +110,21 @@ float NodeGraph::getManhattanDistance(Node* start, Node* end) {
 
 void NodeGraph::drawGraph(Node* start)
 {
-	DynamicArray<Node*> drawnList = DynamicArray<Node*>();
-	drawConnectedNodes(start, drawnList);
+	//DynamicArray<Node*> drawnList = DynamicArray<Node*>();
+	//drawConnectedNodes(start, drawnList);
 }
 
 void NodeGraph::drawNode(Node* node, float size)
 {
-	static char buffer[10];
-	sprintf_s(buffer, "%.0f", node->gScore);
+	//static char buffer[10];
+	//sprintf_s(buffer, "%.0f", node->gScore);
 
-	//Draw the circle for the outline
-	DrawCircle((int)node->position.x, (int)node->position.y, size + 1, GetColor(node->color));
-	//Draw the inner circle
-	DrawCircle((int)node->position.x, (int)node->position.y, size, GetColor(node->color));
-	//Draw the text
-	DrawText(buffer, (int)node->position.x, (int)node->position.y, .8f, BLACK);
+	////Draw the circle for the outline
+	//DrawCircle((int)node->position.x, (int)node->position.y, size + 1, GetColor(node->color));
+	////Draw the inner circle
+	//DrawCircle((int)node->position.x, (int)node->position.y, size, GetColor(node->color));
+	////Draw the text
+	//DrawText(buffer, (int)node->position.x, (int)node->position.y, .8f, BLACK);
 }
 
 void NodeGraph::drawConnectedNodes(Node* node, DynamicArray<Node*>& drawnList)

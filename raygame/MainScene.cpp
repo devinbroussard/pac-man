@@ -14,7 +14,6 @@ void MainScene::start()
 	player->getTransform()->setScale({ 50,50 });
 
 	Agent* agent = new Agent(0, 0, "Agent", 200, 500);
-	agent->getTransform()->setScale({ 50,50 });
 	
 	WanderComponent* wanderComponent = new WanderComponent(1000, 100, 100);
 	agent->addComponent(wanderComponent);

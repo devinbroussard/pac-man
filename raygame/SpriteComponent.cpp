@@ -11,11 +11,9 @@ SpriteComponent::SpriteComponent(Texture2D* texture) : Component::Component()
 	m_texture = texture;
 }
 
-SpriteComponent::SpriteComponent(const char* leftPath, const char* rightPath) : Component::Component()
+SpriteComponent::SpriteComponent(const char* path) : Component::Component()
 {
-	m_rightTexture = new Texture2D(RAYLIB_H::LoadTexture(rightPath));
-	m_leftTexture = new Texture2D(RAYLIB_H::LoadTexture(leftPath));
-	m_texture = m_rightTexture;
+	m_texture = new Texture2D(RAYLIB_H::LoadTexture(path));
 }
 
 SpriteComponent::~SpriteComponent()
@@ -26,12 +24,7 @@ SpriteComponent::~SpriteComponent()
 
 void SpriteComponent::update(float deltaTime)
 {
-	MoveComponent* moveComponent = getOwner()->getComponent<MoveComponent>();
-
-	if (moveComponent->getVelocity().x < 0)
-		m_texture = m_leftTexture;
-	else if (0 < moveComponent->getVelocity().x)
-		m_texture = m_rightTexture;
+	
 
 	Component::start();
 }

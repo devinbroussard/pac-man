@@ -22,7 +22,8 @@ public:
 		WALL,
 		MUD,
 		PLAYER,
-		GHOST
+		GHOST,
+		COIN
 	};
 
 	/// <summary>
@@ -67,6 +68,10 @@ public:
 	/// <returns>A Vector2 with the position of the tile</returns>
 	MathLibrary::Vector2 getPosition(Tile tile);
 
+	//Lowers the coin count of the scene by one
+	void lowerCointCount() { m_coinCount--; }
+
+
 protected:
 	/// <summary>
 	/// Create a tile from a given key. If an actor is created, it is added to the scene.
@@ -87,5 +92,6 @@ private:
 	Tile m_grid[WIDTH][HEIGHT];
 
 	Player* m_player;
+	int m_coinCount;
 };
 
